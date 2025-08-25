@@ -4,7 +4,7 @@
 > Wake word **“ZERO”** → talk to GPT/Grok → HUD replies in your glasses.  
 > Gesture to move a cursor, click, scroll, and manipulate 3D/CAD models.
 
-![hero](media/photos/hero.jpg)
+![hero](media/photos/EXP.jpg)
 
 ---
 
