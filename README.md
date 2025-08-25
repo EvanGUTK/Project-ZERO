@@ -21,11 +21,11 @@
 
 ## 📦 Hardware (core build)
 
-- Raspberry Pi 5 (8GB recommended)
-- CSI camera (Camera Module 3 Wide)
+- Raspberry Pi 5 8GB
+- CSI camera
 - 1× micro HDMI micro-display (1.3–1.5") **or** AR glasses w/ HDMI-in
-- I²S or USB mini mic, small speaker/bone-conduction (optional)
-- 30,000 mAh USB-C PD pack (you have this)
+- I²S or USB mini mic, small speaker/bone-conduction
+- 30,000 mAh USB-C PD pack
 - 3D-printed goggle frame + mounts
 
 Full BOM with links: **[docs/hardware-bom.md](docs/hardware-bom.md)**
