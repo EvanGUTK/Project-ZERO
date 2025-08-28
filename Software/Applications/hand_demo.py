@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-"""
-hand_demo.py — lightweight hand detection demo
-
-This script tries MediaPipe for hand landmarks if available. If MediaPipe
-is not installed, it falls back to a simple skin-color contour detector.
-
-Press 'q' to quit.
-"""
-
 import cv2
 import time
 import os
@@ -90,11 +80,11 @@ def skin_color_fallback():
             if not ret:
                 break
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            # Simple skin color range; may need tuning for lighting/skin tones
+            # Simple skin color range
             lower = (0, 30, 60)
             upper = (20, 150, 255)
             mask = cv2.inRange(hsv, lower, upper)
-            # Morphology to clean mask
+            # Clean mask
             kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
             mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel, iterations=2)
             contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
