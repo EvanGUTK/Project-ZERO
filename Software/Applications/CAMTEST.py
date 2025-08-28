@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 # CAMTEST.py — ultra-simple YOLOv8n + CSI cam test on Pi5
 
 import cv2, time
 from picamera2 import Picamera2
 from ultralytics import YOLO
 
-# Load YOLOv8 nano model
+# Load YOLOv8
 model = YOLO("yolov8n.pt")
 
 # Start Pi camera
@@ -14,7 +13,7 @@ config = picam2.create_preview_configuration(main={"size": (640, 480), "format":
 picam2.configure(config)
 picam2.start()
 
-# OpenCV preview window
+# OpenCV preview
 cv2.namedWindow("CAMTEST", cv2.WINDOW_NORMAL)
 
 print("[INFO] Starting camera test... press 'q' to quit")
@@ -24,11 +23,11 @@ try:
     while True:
         frame = picam2.capture_array()
 
-        # Run YOLO inference
+        # Run YOLO
         results = model(frame, verbose=False)
         annotated = results[0].plot()
 
-        # Show FPS every second
+        # Show FPS
         frames += 1
         if time.time() - t0 >= 1.0:
             print(f"FPS: {frames}")
