@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-AR-style desktop overlay on CSI camera feed.
-Simulates AR glasses view by blending desktop capture with camera feed.
-"""
 from picamera2 import Picamera2
 import cv2
 import numpy as np
@@ -20,7 +15,7 @@ class AROverlay:
         )
         self.picam2.configure(config)
         
-        # Initialize screen capture (using scrot)
+        # Initialize screen (using scrot)
         subprocess.run(['sudo', 'apt-get', 'install', '-y', 'scrot'], check=True)
         
         # Create windows
@@ -40,7 +35,7 @@ class AROverlay:
         self.fps_list = []
         self.last_time = time.time()
         
-        # Create trackbars
+        # Trackbars
         cv2.createTrackbar('Exposure', self.controls_window, 0, 100, self.on_exposure)
         cv2.createTrackbar('Brightness', self.controls_window, 50, 100, self.on_brightness)
         cv2.createTrackbar('Contrast', self.controls_window, 50, 100, self.on_contrast)
@@ -75,7 +70,7 @@ class AROverlay:
         return sum(self.fps_list) / len(self.fps_list)
         
     def adjust_image(self, frame):
-        # Apply brightness and contrast
+        # Brightness and contrast
         adjusted = cv2.convertScaleAbs(frame, alpha=self.contrast, beta=self.brightness * 50)
         return adjusted
         
@@ -84,7 +79,7 @@ class AROverlay:
         
         try:
             while True:
-                # Capture camera frame
+                # Camera frame
                 camera_frame = self.picam2.capture_array()
                 
                 # Capture screen using scrot
@@ -93,38 +88,38 @@ class AROverlay:
                 screen_frame = np.array(screen)
                 screen_frame = cv2.cvtColor(screen_frame, cv2.COLOR_RGB2BGR)
                 
-                # Resize screen frame to match camera frame
+                # Resize screen
                 screen_frame = cv2.resize(screen_frame, (camera_frame.shape[1], camera_frame.shape[0]))
                 
-                # Apply image adjustments
+                # Image adjustments
                 camera_frame = self.adjust_image(camera_frame)
                 
                 # Blend frames
                 blended = cv2.addWeighted(camera_frame, 1-self.overlay_opacity, 
                                         screen_frame, self.overlay_opacity, 0)
                 
-                # Calculate FPS
+                # FPS
                 fps = self.calculate_fps()
                 
-                # Add FPS counter
+                # FPS counter
                 cv2.putText(blended, f"FPS: {fps:.1f}", (10, 30),
                            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 
-                # Show side by side if enabled
+                # Show side by side view
                 if self.show_original:
                     display = np.hstack((camera_frame, blended))
                 else:
                     display = blended
                 
-                # Display the result
+                # Result
                 cv2.moveWindow(self.main_window, self.window_x, self.window_y)
                 cv2.imshow(self.main_window, display)
                 
-                # Handle keyboard input
+                # Keyboard input
                 key = cv2.waitKey(1) & 0xFF
-                if key == ord('q') or key == 27:  # ESC
+                if key == ord('q') or key == 27:
                     break
-                elif key == ord('s'):  # Toggle side-by-side view
+                elif key == ord('s'):
                     self.show_original = not self.show_original
                 
         finally:
