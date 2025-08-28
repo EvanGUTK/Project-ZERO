@@ -64,3 +64,21 @@ sudo modprobe uinput
 # optional: give GPU more memory
 echo "gpu_mem=512" | sudo tee -a /boot/firmware/config.txt
 sudo reboot
+
+---
+
+## Hand demo (lightweight)
+
+I added a simple hand-detection demo at `Software/Applications/hand_demo.py`.
+
+- It uses MediaPipe if installed for reliable hand landmarks.
+- If MediaPipe is not available, it falls back to a skin-color contour detector.
+
+Run inside your project virtual environment:
+
+```bash
+source ~/zero-venv/bin/activate
+python Software/Applications/hand_demo.py
+```
+
+Press `q` to quit the demo. This is a minimal test to validate camera, detection, and low-latency overlays.
