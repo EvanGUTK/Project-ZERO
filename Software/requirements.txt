@@ -19,6 +19,8 @@
 #    sudo apt install python3-libcamera python3-picamera2 libcap-dev
 #
 # The list below pins the packages currently used for development.
+# For everyday development and to keep installs fast and flexible, use the
+# minimal core requirements in `Software/requirements-core.txt` (unpinned).
 
 appdirs==1.4.4
 asgiref==3.6.0

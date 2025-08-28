@@ -1,0 +1,15 @@
+# Minimal, unpinned core dependencies for development (preferred)
+opencv-python
+numpy
+torch
+torchvision
+ultralytics
+picamera2
+mediapipe
+simplejpeg
+
+# Install this file in a virtual environment like:
+# python3 -m venv ~/zero-venv
+# source ~/zero-venv/bin/activate
+# pip install --upgrade pip setuptools wheel
+# pip install -r Software/requirements-core.txt
