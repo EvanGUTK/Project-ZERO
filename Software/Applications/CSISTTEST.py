@@ -4,7 +4,7 @@ import cv2
 picam2 = Picamera2()
 config = picam2.create_preview_configuration(main={"size": (640, 480), "format": "BGR888"})
 picam2.configure(config)
-picam2.set_controls({"AwbEnable": True, "ExposureTime": 0})  # Enable auto white balance and auto exposure
+picam2.set_controls({"AwbEnable": True, "ExposureTime": 0})
 picam2.start()
 
 cv2.namedWindow("CSI Camera Test", cv2.WINDOW_NORMAL)
